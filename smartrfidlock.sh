@@ -1,7 +1,6 @@
 #!/bin/bash 
 cat /dev/arduino > /tmp/serial.txt &
 sleep 2
-
 #open.sen.se
 APIKEY=apikkey.nr.
 STATE="LOCKED"
@@ -12,6 +11,8 @@ PERO="card.nr" #52421
 BRNA2="card.nr" #52420
 VALENT="card.nr" #52422
 VALENTINO="card.nr"
+zatvarano=0
+otvarano=0
 zatvarano=0
 otvarano=0
 #DANIEL=""
@@ -25,6 +26,10 @@ TEMP=$(digitemp_DS9097 -a -q -o"%.2C")
 
 ARDUINO() {
 	echo -n "$1" > /dev/arduino
+}
+
+LOG() {
+	echo $(date +"%m-%d %H:%M") $STATE by "$1" >> /www/usr.log.txt
 }
   
 OPEN() {
@@ -70,7 +75,6 @@ do
   VARN=$(tail -n 1 /tmp/serial.txt)          
   
   if [[ "$VARN" != "$VARO"  ]]; then 
-
 #BRAVA open
    if [[ "$VARN" == "LOCK" ]]; then                                                                                                                                   
 	  BRAVA="open"
@@ -82,19 +86,26 @@ do
 	  #mail,sirena
     elif [[ "$STATE" == "LOCKED" ]]; then
 	if [[ "$VARN" == "$CODE" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG code
 	elif [[ "$VARN" == "$BRNA" ]]; then
-	  STATE="UNLOCKED"
+		STATE="UNLOCKED"
+		LOG Brna
 	elif [[ "$VARN" == "$BRNA2" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG Brna
 	elif [[ "$VARN" == "$PERO" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG Petar
 	elif [[ "$VARN" == "$VALENT" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG Valent
 	elif [[ "$VARN" == "$VALENTINO" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG Valentino
 	elif [[ "$VARN" == "$DANIEL" ]]; then
-	  STATE="UNLOCKED"
+	  	STATE="UNLOCKED"
+		LOG Daniel
 	elif [[ "$VARN" == "PRAZNO" ]]; then
 	    echo "prazno"
 	else
@@ -104,19 +115,26 @@ do
 	
     elif [[ "$STATE" == "UNLOCKED" && "$BRAVA" == "closed" ]]; then
 	if [[ "$VARN" == "$CODE" ]]; then
-	  STATE="LOCKED"
+		STATE="LOCKED"
+		LOG code
 	elif [[ "$VARN" == "$BRNA" ]]; then
-	  STATE="LOCKED"
+	  	STATE="LOCKED"
+		LOG Brna
 	elif [[ "$VARN" == "$BRNA2" ]]; then
-	  STATE="LOCKED"
+		STATE="LOCKED"
+		LOG Brna
 	elif [[ "$VARN" == "$PERO" ]]; then
-	  STATE="LOCKED"
+	  	STATE="LOCKED"
+		LOG Petar
 	elif [[ "$VARN" == "$VALENT" ]]; then
-	  STATE="LOCKED"
+		STATE="LOCKED"
+		LOG Valent
 	elif [[ "$VARN" == "$VALENTINO" ]]; then
-	  STATE="LOCKED"
+	  	STATE="LOCKED"
+		LOG Valentino
 	elif [[ "$VARN" == "$DANIEL" ]]; then
-	  STATE="LOCKED"
+	  	STATE="LOCKED"
+		LOG Daniel
 	elif [[ "$VARN" == "0" ]]; then
 	  ARDUINO ";unlock;ok;"
 	elif [[ "$VARN" == "PRAZNO" ]]; then
