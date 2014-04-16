@@ -13,8 +13,7 @@ VALENT="card.nr" #52422
 VALENTINO="card.nr"
 zatvarano=0
 otvarano=0
-zatvarano=0
-otvarano=0
+
 #DANIEL=""
 #Unauthorized_feed= 44776
 #Authorized_feed=   44777
@@ -83,7 +82,7 @@ do
 	  BRAVA="closed"
    elif [[ "$VARN" == "CASE" ]]; then                                                                                                                                   
 	  echo TEMPER!!!!!!
-	  #mail,sirena
+	  LOG TEMPER!!!!!
     elif [[ "$STATE" == "LOCKED" ]]; then
 	if [[ "$VARN" == "$CODE" ]]; then
 	  	STATE="UNLOCKED"
@@ -176,7 +175,7 @@ do
 	    ssh -f root@192.168.35.225 -i /etc/dropbear/dropbear_rsa_host_key  "sh -c 'nohup mplayer /home/labos/intruder.mp3 > /dev/null 2>1 &'"
 	   # curl 'http://api.sen.se/events/?sense_key='$APIKEY -X POST -H "Content-type: application/json" -d '[{"feed_id": '44776',"value": '$TEMP'}]'
 	    ssh -f root@192.168.35.225 -i /etc/dropbear/dropbear_rsa_host_key "echo -n "L1*7" > /dev/ttyUSB0 &"
-	    #echo "intrude
+	    LOG INTRUDER
 	    zatvarano="0"
     fi
   fi                                                                                                                                             
