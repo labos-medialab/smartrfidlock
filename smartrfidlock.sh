@@ -3,15 +3,15 @@ cat /dev/arduino > /tmp/serial.txt &
 sleep 2
 
 #open.sen.se
-APIKEY=c4-GrB-rRdaYyCcv7zYojQ
+APIKEY=apikkey.nr.
 STATE="LOCKED"
 VARO="PRAZNO"
-CODE="20062013"
-BRNA="0F023DCB3FC4" #52421
-PERO="1000826AF800" #52421
-BRNA2="10008258C208" #52420
-VALENT="1000892D388C" #52422
-VALENTINO="0300CD682482"
+CODE="passwd"
+BRNA="card.nr" #52421
+PERO="card.nr" #52421
+BRNA2="card.nr" #52420
+VALENT="card.nr" #52422
+VALENTINO="card.nr"
 zatvarano=0
 otvarano=0
 #DANIEL=""
